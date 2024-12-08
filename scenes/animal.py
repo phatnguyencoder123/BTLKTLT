@@ -19,6 +19,7 @@ def reset_animals_count():
     animals_count = dict((a, 0) for a in ASSET_FILES)
 
 
+
 class Animal:
     def __init__(self, index):
         self.index = index
@@ -35,6 +36,7 @@ class Animal:
         self.image = image.load(self.image_path)
         self.image = transform.scale(self.image, (IMAGE_SIZE - 2 * MARGIN, IMAGE_SIZE - 2 * MARGIN))
         self.box = self.image.copy()
-        self.box.fill((200, 200, 200))
+        self.box.fill((102, 176, 255, 118))  # Alpha = 128, độ trong suốt trung bình
+
         animals_count[self.name] += 1
 

@@ -16,13 +16,13 @@ class OpeningScene:
         self.button_sound_off = pygame.image.load("assets/mute_icon.png")
 
         # Thay đổi kích thước các nút
-        self.button_play = pygame.transform.scale(self.button_play, (180, 80))
+        self.button_play = pygame.transform.scale(self.button_play, (500, 175))
         self.button_settings = pygame.transform.scale(self.button_settings, (80, 80))
         self.button_sound_on = pygame.transform.scale(self.button_sound_on, (80, 80))
         self.button_sound_off = pygame.transform.scale(self.button_sound_off, (80, 80))
 
         self.buttons = {
-            "play": self.button_play.get_rect(center =(SCREEN_WIDTH // 2 , SCREEN_HEIGHT - 100)),
+            "play": self.button_play.get_rect(center =(SCREEN_WIDTH // 2, SCREEN_HEIGHT //2)),
             "settings": self.button_settings.get_rect(topright=(SCREEN_WIDTH - 10, 10)),
             "sound": self.button_sound_on.get_rect(topright=(SCREEN_WIDTH - 100, 10)),
         }

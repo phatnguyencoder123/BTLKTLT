@@ -1,6 +1,9 @@
 import pygame
 from local import *
 
+def load_image(path):
+    image = pygame.image.load(path).convert()
+    return image
 
 class SettingsScene:
     def __init__(self, screen, manager, button_data):
@@ -51,9 +54,9 @@ class SettingsScene:
 class OpenSettingScene(SettingsScene):
     def __init__(self, screen, manager):
         button_data = {
-            "resume": {"image": "assets/resume.png", "size": (200, 100), "position": (SCREEN_WIDTH // 2, SCREEN_HEIGHT - 200)},
-            "level": {"image": "assets/level_icon.png", "size": (100, 100), "position": (SCREEN_WIDTH // 2, SCREEN_HEIGHT - 300)},
-            "quit": {"image": "assets/quit.png", "size": (100, 100), "position": (SCREEN_WIDTH // 2, SCREEN_HEIGHT - 400)},
+            "resume": {"image": "assets/home_icon.png", "size": (100, 100), "position": (SCREEN_WIDTH // 2, SCREEN_HEIGHT - 200)},
+            "level": {"image": "assets/level_icon.png", "size": (450, 190), "position": (SCREEN_WIDTH // 2, SCREEN_HEIGHT - 300)},
+            "quit": {"image": "assets/quit.png", "size": (150, 70), "position": (SCREEN_WIDTH - 100, SCREEN_HEIGHT - 60)},
         }
         super().__init__(screen, manager, button_data)
 
@@ -69,9 +72,10 @@ class OpenSettingScene(SettingsScene):
 class PlaySettingScene(SettingsScene):
     def __init__(self, screen, manager):
         button_data = {
-            "restart": {"image": "assets/restart.png", "size": (200, 100), "position": (SCREEN_WIDTH // 2, SCREEN_HEIGHT - 120)},
+            "restart": {"image": "assets/restart.png", "size": (300, 120), "position": (SCREEN_WIDTH // 2, SCREEN_HEIGHT - 120)},
             "home": {"image": "assets/home_icon.png", "size": (100, 100), "position": (SCREEN_WIDTH // 2, SCREEN_HEIGHT - 200)},
-            "resume": {"image": "assets/resume.png", "size": (100, 100), "position": (SCREEN_WIDTH // 2, SCREEN_HEIGHT - 300)},
+            "quit": {"image": "assets/quit.png", "size": (100, 30), "position": (SCREEN_WIDTH - 60, SCREEN_HEIGHT - 60)},
+            "resume": {"image": "assets/resume.png", "size": (300, 120), "position": (SCREEN_WIDTH // 2, SCREEN_HEIGHT - 300)},
         }
         super().__init__(screen, manager, button_data)
 
@@ -80,5 +84,7 @@ class PlaySettingScene(SettingsScene):
             return lambda: self.manager.change_scene("play")
         elif key == "home":
             return lambda: self.manager.change_scene("opening")
+        elif key == "quit":
+            return lambda: (pygame.quit(), exit())
         elif key == "resume":
             return lambda: self.manager.change_scene("play_back")

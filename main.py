@@ -8,6 +8,8 @@ from scenes.ending import CongratulationsScene
 from scenes.ending import GameOverScene
 from local import *
 
+
+
 pygame.init()
 
 screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
@@ -66,7 +68,7 @@ class SceneManager:
         clock = pygame.time.Clock()
         running = True
         while running:
-            if self.current_scene == "play_back":
+            if self.current_scene == "play_back" :
                 current_scene = self.scenes_back[self.current_scene]
             else:
                 current_scene = self.scenes[self.current_scene]
