@@ -38,4 +38,3 @@ class Animal:
         self.box.fill((200, 200, 200))
         animals_count[self.name] += 1
 
-
