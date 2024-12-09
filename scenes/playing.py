@@ -4,6 +4,9 @@ from scenes.animal import Animal
 from time import sleep
 from music import Playmusic
 
+class SceneManager:
+    def __init__(self):
+        self.saved_time = "00:00"  # Biến lưu thời gian chơi
 
 class PlayingScene:
     def __init__(self, screen, manager):
@@ -97,9 +100,6 @@ class PlayingScene:
     def update(self):
         pass
 
-
-
-
     def render(self):
         self.screen.blit(self.bg_image, (0, 0))
         self.screen.blit(self.button_settings, self.buttons["settings"])
@@ -133,19 +133,20 @@ class PlayingScene:
                     total_skipped += 1
 
         if not self.time_play:
-            elapsed_time = self.paused_time  # When paused, use the paused time
+            elapsed_time = self.paused_time
         else:
-            elapsed_time = pygame.time.get_ticks() - self.start_time  # Use the current time when playing
+            elapsed_time = pygame.time.get_ticks() - self.start_time
 
-        total_seconds = elapsed_time // 1000  # Convert to seconds
+        total_seconds = elapsed_time // 1000
         minutes = total_seconds // 60
         seconds = total_seconds % 60
+        formatted_time = f"{minutes:02}:{seconds:02}"  # Định dạng thành "MM:SS"
 
-        # Display the time on screen
+        # Hiển thị thời gian
         font = pygame.font.Font("assets/font.ttf", 60)
-        time_text = font.render(f"{minutes:02}:{seconds:02}", True, (255, 255, 255))
-        self.screen.blit(time_text, (280, -15))  # Positioning the time on the screen
-
+        time_text = font.render(formatted_time, True, (255, 255, 255))
+        self.screen.blit(time_text, (280, -15))
+        
         if self.level == 2:
             if self.cnt > 3 or seconds / 60 > 3:
                 self.manager.change_scene("end_lose")
@@ -169,4 +170,5 @@ class PlayingScene:
             self.current_images_displayed = []
 
         if total_skipped == len(self.tiles):
+            self.manager.saved_time = formatted_time  # Lưu thời gian chơi           
             self.manager.change_scene("end_win")
