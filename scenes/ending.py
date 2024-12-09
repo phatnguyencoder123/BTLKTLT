@@ -32,7 +32,7 @@ class EndGameScene:
                 pygame.quit()
                 return False
             if event.type == pygame.MOUSEBUTTONDOWN:
-                if event.button == 1:  # Xử lý chỉ khi người dùng click chuột trái
+                if event.button == 1:  # Left-click
                     mouse_pos = event.pos
                     if self.buttons["play_again"].collidepoint(mouse_pos):
                         self.manager.change_scene("play")
@@ -50,6 +50,11 @@ class EndGameScene:
         self.screen.blit(self.button_main_menu, self.buttons["main_menu"])
         sound_button = self.button_sound_on if self.sound_on else self.button_sound_off
         self.screen.blit(sound_button, self.buttons["sound"])
+
+        # Display elapsed time
+        font = pygame.font.Font("assets/font.ttf", 60)
+        elapsed_time_text = font.render(f"Time: {self.manager.saved_time}", True, (255, 255, 255))
+        self.screen.blit(elapsed_time_text, (SCREEN_WIDTH // 2 - 200, SCREEN_HEIGHT // 2 - 375))
 
 class CongratulationsScene(EndGameScene):
     def __init__(self, screen, manager):
